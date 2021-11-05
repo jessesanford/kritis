@@ -21,12 +21,13 @@ set -e
 #  -H "Content-Type: application/json" \
 #  --data '{"name":"projects/kritis"}'
 
-curl -X POST \
-  http://10.58.44.11:32164/v1beta1/projects \
+curl -k --cert grafeas.pem -X POST \
+  http://grafeas-server:32164/v1beta1/projects \
   -H "Content-Type: application/json" \
   --data '{"name":"projects/kritis"}'
 
 # Now, create an attestation for the image.
+export GODEBUG=x509ignoreCN=0
 go run create_attestation.go
 
 # The pod should now be admitted.

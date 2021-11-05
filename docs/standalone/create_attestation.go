@@ -63,7 +63,7 @@ func main() {
 	}
 	tlsConfig.BuildNameToCertificate()
 	creds := credentials.NewTLS(tlsConfig)
-  conn, err := grpc.Dial("10.58.44.11:32164", grpc.WithTransportCredentials(creds))
+  conn, err := grpc.Dial("grafeas-server:32164", grpc.WithTransportCredentials(creds))
 	defer conn.Close()
 
 	client := grafeas.NewGrafeasV1Beta1Client(conn)
